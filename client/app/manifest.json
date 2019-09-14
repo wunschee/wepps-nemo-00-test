@@ -1,0 +1,216 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "hahu.pmtool",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{Label.app.title}}",
+		"description": "{{Label.app.description}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		},
+        "dataSources": {
+			"generalRemote": {
+                "uri": "https://hahu_openui5/services/general/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+			},
+			"applicationRemote": {
+                "uri": "https://hahu_openui5/services/application/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+			},
+			"pmtoolRemote": {
+                "uri": "https://hahu_openui5/services/pmtool/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "hahu.pmtool.view.Main",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.60.1",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.ui.layout": {},
+				"sap.f": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "hahu.pmtool.i18n.i18n"
+				}
+			},
+			"general": {
+				"preload": true,
+				"type": "sap.ui.model.odata.v4.ODataModel",
+                "dataSource": "generalRemote",
+				"settings": {
+					"autoExpandSelect": true,
+					"operationMode": "Server",
+					"groupId": "$direct",
+					"synchronizationMode": "None"
+                }
+			},
+			"application": {
+				"preload": true,
+				"type": "sap.ui.model.odata.v4.ODataModel",
+                "dataSource": "applicationRemote",
+				"settings": {
+					"autoExpandSelect": true,
+					"operationMode": "Server",
+					"groupId": "$direct",
+					"synchronizationMode": "None"
+                }
+            },
+			"pmtool": {
+				"preload": true,
+				"type": "sap.ui.model.odata.v4.ODataModel",
+                "dataSource": "pmtoolRemote",
+				"settings": {
+					"autoExpandSelect": true,
+					"operationMode": "Server",
+					"groupId": "$direct",
+					"synchronizationMode": "None"
+                }
+            }
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "hahu.pmtool.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": "notFound"
+				}
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "root",
+					"target": [
+						"master",
+						"start"
+					]
+				},
+				{
+					"pattern": "detail/{detailId}",
+					"name": "detail",
+					"target": [
+						"detail",
+						"master"
+					]
+				},
+				{
+					"pattern": "approval/{detailId}",
+					"name": "approval",
+					"target": [
+						"detail",
+						"master"
+					]
+				},
+				{
+					"pattern": "report",
+					"name": "report",
+					"target": "report"
+				}
+			],
+			"targets": {
+				"root": {
+					"viewName": "Root",
+					"viewLevel": 1
+				},
+				"master": {
+					"parent": "root",
+					"viewName": "Master",
+					"controlId": "idRoot",
+					"controlAggregation": "masterPages",
+					"viewLevel": 1,
+					"transition": "flip"
+				},
+				"start": {
+					"parent": "root",
+					"viewName": "Start",
+					"controlId": "idRoot",
+					"controlAggregation": "detailPages",
+					"viewLevel": 1,
+					"transition": "flip"
+				},
+				"detail": {
+					"parent": "root",
+					"viewName": "Detail",
+					"controlId": "idRoot",
+					"controlAggregation": "detailPages",
+					"viewLevel": 1,
+					"transition": "flip"
+				},
+				"approval": {
+					"viewName": "Approval",
+					"viewLevel": 2
+				},
+				"report": {
+					"viewName": "Report",
+					"viewLevel": 2
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewLevel": 2,
+					"transition": "show"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		}
+	}
+}

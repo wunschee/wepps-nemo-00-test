@@ -1,0 +1,985 @@
+<mvc:View
+    controllerName="hahu.pmtool.controller.Detail"
+    xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified">
+	<Page
+        id="page1"
+        title="{i18n>Label.detail.title}: {pmtool>Title}"
+        enableScrolling="false"
+        showNavButton="{device>/system/phone}"
+        navButtonPress="onNavBack">
+        <IconTabBar
+			id="idIconTabBar"
+			select="handleIconTabBarSelect"
+			class="sapUiResponsiveContentPadding"
+			stretchContentHeight="true">
+			<items>
+				<IconTabFilter
+					icon="sap-icon://family-care"
+					text="{i18n>Label.detail.organization}"
+					key="organization">
+					<ScrollContainer
+						height="100%"
+						width="100%"
+						horizontal="false"
+						vertical="true">
+						<form:SimpleForm
+							id="formOrg"
+							minWidth="1024"
+							editable="true"
+							layout="ResponsiveGridLayout"
+							title=""
+							labelSpanXL="6"
+							labelSpanL="6"
+							labelSpanM="4"
+							labelSpanS="4"
+							emptySpanXL="0"
+							emptySpanL="0"
+							emptySpanM="0"
+							emptySpanS="0"
+							columnsXL="2"
+							columnsL="2"
+							columnsM="2">
+							<form:content>
+								<core:Title text="{i18n>Label.detail.profile1}" />
+								<Label text="{i18n>Label.detail.title}" required="true" />
+								<Input
+									editable="{viewModel>/bEnabled}"
+									value="{
+										path: 'pmtool>Title',
+										type: 'sap.ui.model.type.String'
+									}"
+									change="onUpdate"
+									width="100%" />
+								<Label text="{i18n>Label.detail.complexity}" required="true" />
+								<Input
+									editable="false"
+									value="{
+										path: 'pmtool>CalculationId',
+										formatter: '.formatter.getProjectComplexity',
+										type: 'sap.ui.model.type.Integer'
+									}"
+									change="onUpdate"
+									width="100%" />
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									icon="sap-icon://edit"
+									press="onEditComplexity" />
+								<Label text="{i18n>Label.detail.leader}" required="true" />
+								<Input
+									editable="false"
+									value="{
+										path: 'pmtool>Leader',
+										formatter: '.formatter.getUserFromTaxNumber',
+										type: 'sap.ui.model.type.String'
+									}"
+									width="100%" />
+								<Label text="{i18n>Label.detail.leader.it}" visible="{viewModel>/bVisibleItLeader}" />
+								<Input
+									id="leaderItInput"
+									visible="{viewModel>/bVisibleItLeader}"
+									editable="{viewModel>/bEnabled}"
+									type="Text"
+									value="{
+										path: 'pmtool>LeaderIt',
+										formatter: '.formatter.getUserFromTaxNumber',
+										type: 'sap.ui.model.type.String'
+									}"
+									placeholder="{i18n>PlaceHolder.name}"
+									showSuggestion="true"
+									suggest="handleSuggest"
+									suggestionItems="{general>/Users}" >
+									<suggestionItems>
+										<core:Item key="{general>TaxNumber}" text="{general>DisplayName}" />
+									</suggestionItems>
+								</Input>
+								<Button
+									visible="{viewModel>/bVisibleItLeader}"
+									enabled="{viewModel>/bEnabled}"
+									icon="sap-icon://add"
+									press="onAddLeaderIt" />
+								<Button
+									visible="{viewModel>/bVisibleItLeader}"
+									enabled="{viewModel>/bEnabled}"
+									icon="sap-icon://delete"
+									press="onDeleteLeaderIt" />
+								<Label text="{i18n>Label.detail.client}" required="true" />
+								<Input
+									editable="{viewModel>/bEnabled}"
+									id="clientInput"
+									type="Text"
+									value="{
+										path: 'pmtool>Client',
+										formatter: '.formatter.getUserFromTaxNumber',
+										type: 'sap.ui.model.type.String'
+									}"
+									placeholder="{i18n>PlaceHolder.name}"
+									showSuggestion="true"
+									suggest="handleSuggest"
+									suggestionItems="{general>/Users}" >
+									<suggestionItems>
+										<core:Item key="{general>TaxNumber}" text="{general>DisplayName}" />
+									</suggestionItems>
+								</Input>
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									icon="sap-icon://add"
+									press="onAddClient" />
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									icon="sap-icon://delete"
+									press="onDeleteClient" />
+								<Label text="{i18n>Label.detail.projecttype}" required="true" />
+								<CheckBox
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.projecttype.fast}"
+									selected="{
+										path: 'pmtool>IsTypeFast',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<CheckBox
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.projecttype.it}"
+									selected="{
+										path: 'pmtool>IsTypeIt',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<CheckBox
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.projecttype.smart}"
+									selected="{
+										path: 'pmtool>IsTypeSmart',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<CheckBox
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.projecttype.strategic}"
+									selected="{
+										path: 'pmtool>IsTypeStrategic',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<CheckBox
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.projecttype.digitalization}"
+									selected="{
+										path: 'pmtool>IsTypeDigitalization',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<CheckBox
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.projecttype.other}"
+									selected="{
+										path: 'pmtool>IsTypeOther',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<CheckBox
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.projecttype.confidental}"
+									selected="{
+										path: 'pmtool>IsTypeConfidental',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<Label text="{i18n>Label.detail.nr}" visible="{viewModel>/bVisibleNr}" required="true" />
+								<Input
+									visible="{viewModel>/bVisibleNr}"
+									editable="{
+										path: 'pmtool>Id',
+										formatter: '.formatter.getIsControlling',
+										type: 'sap.ui.model.type.Boolean'
+									}"
+									value="{pmtool>Nr}"
+									placeholder="{i18n>PlaceHolder.number}"
+									width="100%" />
+								<Label text="{i18n>Label.detail.iscapex}" visible="{viewModel>/bVisibleCapex}" />
+								<CheckBox
+									visible="{viewModel>/bVisibleCapex}"
+									editable="{viewModel>/bEnabled}"
+									text=""
+									selected="{
+										path: 'pmtool>IsCapex',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<Label text="{i18n>Label.detail.isprojectbonus}" />
+								<CheckBox
+									editable="{viewModel>/bEnabled}"
+									text=""
+									selected="{
+										path: 'pmtool>IsProjectBonus',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<Label text="{i18n>Label.detail.start}" required="true" />
+								<DatePicker
+									id="startDate"
+									enabled="{viewModel>/bEnabled}"
+									value="{pmtool>Start}"
+									valueFormat="y. MMMM d."
+									displayFormat="y. MMMM d." />
+								<Label text="{i18n>Label.detail.stop}" required="true" />
+								<DatePicker
+									id="stopDate"
+									enabled="{viewModel>/bEnabled}"
+									value="{pmtool>Stop}"
+									valueFormat="y. MMMM d."
+									displayFormat="y. MMMM d." />
+								<Label text="{i18n>Label.dialog.leadtime}" />
+								<Text
+									id="leadTime"
+									text="{
+										parts:[
+											{path: 'pmtool>Start'},
+											{path: 'pmtool>Stop'}
+										],
+										formatter: '.formatter.getDateDiff'
+									}" />
+								<core:Title text="{i18n>Label.detail.profile2}" />
+								<Label text="{i18n>Label.detail.addmember}" />
+								<Input
+									editable="{viewModel>/bEnabled}"
+									id="memberInput"
+									type="Text"
+									placeholder="{i18n>PlaceHolder.name}"
+									showSuggestion="true"
+									suggest="handleSuggest"
+									suggestionItems="{general>/Users}" >
+									<suggestionItems>
+										<core:Item key="{general>TaxNumber}" text="{general>DisplayName}" />
+									</suggestionItems>
+								</Input>
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									icon="sap-icon://add"
+									press="onAddMember" />
+								<Label text="{i18n>Label.detail.members}" required="true" />
+								<ScrollContainer
+									height="100px"
+									width="100%"
+									horizontal="false"
+									vertical="true"
+									focusable="true">
+									<List
+										id="memberList"
+										mode="{viewModel>/sListMode}"
+										updateFinished="onmemberListUpdateFinished"
+										delete="onDeleteMember"
+										itemPress="onSortListAlphabetically" />
+									<List id="deleteMemberList" visible="false" />
+									<List id="deleteResourceList" visible="false" />
+								</ScrollContainer>
+								<Label text="{i18n>Label.detail.addcommittee}" />
+								<Input
+									editable="{viewModel>/bEnabled}"
+									id="committeeInput"
+									type="Text"
+									placeholder="{i18n>PlaceHolder.name}"
+									showSuggestion="true"
+									suggest="handleSuggest"
+									suggestionItems="{general>/Users}" >
+									<suggestionItems>
+										<core:Item key="{general>TaxNumber}" text="{general>DisplayName}" />
+									</suggestionItems>
+								</Input>
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									icon="sap-icon://add"
+									press="onAddCommittee" />
+								<Label text="{i18n>Label.detail.steeringcommittee}" required="true" />
+								<ScrollContainer
+									height="100px"
+									width="100%"
+									horizontal="false"
+									vertical="true"
+									focusable="true">
+									<List
+										id="committeeList"
+										mode="{viewModel>/sListMode}"
+										updateFinished="oncommitteeListUpdateFinished"
+										delete="onDeleteCommittee"
+										itemPress="onSortListAlphabetically" />
+								</ScrollContainer>
+								<Label text="{i18n>Label.detail.addcustommember}" visible="{viewModel>/bVisibleCustomMember}" />
+								<Input
+									visible="{viewModel>/bVisibleCustomMember}"
+									editable="{viewModel>/bEnabled}"
+									id="custommemberInput"
+									type="Text"
+									placeholder="{i18n>PlaceHolder.name}" />
+								<Button
+									visible="{viewModel>/bVisibleCustomMember}"
+									enabled="{viewModel>/bEnabled}"
+									icon="sap-icon://add"
+									press="onAddCustomMember" />
+								<Label text="{i18n>Label.detail.custommembers}" visible="{viewModel>/bVisibleCustomMember}" />
+								<ScrollContainer
+									visible="{viewModel>/bVisibleCustomMember}"
+									height="100px"
+									width="100%"
+									horizontal="false"
+									vertical="true"
+									focusable="true">
+									<List
+										id="custommemberList"
+										mode="{viewModel>/sListMode}"
+										delete="onDeleteCustomMember"
+										itemPress="onPressCustomMemberList" />
+								</ScrollContainer>
+							</form:content>
+							<form:layoutData>
+								<FlexItemData shrinkFactor="0" backgroundDesign="Solid" styleClass="sapContrastPlus"/>
+							</form:layoutData>
+						</form:SimpleForm>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator icon="sap-icon://open-command-field" />
+				<IconTabFilter
+					icon="sap-icon://detail-view"
+					iconColor="Positive"
+					text="{i18n>Label.detail.description}"
+					key="description">
+					<ScrollContainer
+						height="100%"
+						width="100%"
+						horizontal="false"
+						vertical="true">
+						<form:SimpleForm
+							minWidth="1024"
+							editable="true"
+							layout="ResponsiveGridLayout"
+							title=""
+							labelSpanXL="6"
+							labelSpanL="6"
+							labelSpanM="4"
+							labelSpanS="4"
+							emptySpanXL="0"
+							emptySpanL="0"
+							emptySpanM="0"
+							emptySpanS="0"
+							columnsXL="2"
+							columnsL="2"
+							columnsM="2">
+							<form:content>
+								<core:Title text="{i18n>Label.detail.general1}" />
+								<Label text="{i18n>Label.detail.motivation}" required="true" />
+								<TextArea
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>Motivation}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label text="{i18n>Label.detail.objective}" required="true" />
+								<TextArea
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>Objective}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label text="{i18n>Label.detail.payoffworkinghours}" visible="{viewModel>/bVisiblePayOff}" required="{viewModel>/bRequiredPayOff}" />
+								<TextArea
+									visible="{viewModel>/bVisiblePayOff}"
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>PayoffWorkingHours}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label text="{i18n>Label.detail.payoffcosts}" visible="{viewModel>/bVisiblePayOff}" required="{viewModel>/bRequiredPayOff}" />
+								<TextArea
+									visible="{viewModel>/bVisiblePayOff}"
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>PayoffCosts}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label text="{i18n>Label.detail.documents}" />
+								<u:FileUploader
+									enabled="{viewModel>/bEnabled}"
+									id="fileUploader"
+									visible="{
+										path: 'innovation>/Admins/AdminMode',
+										type: 'sap.ui.model.type.Boolean'
+									}"
+									width="100%"
+									change="handleValueChange"
+									typeMissmatch="handleTypeMissmatch"
+									style="Emphasized"
+									fileType="txt,rtf,pdf,jpg,png,xls,xlsx,doc,docx,ppt,pptx"
+									placeholder="{i18n>PlaceHolder.upload}" />
+								<!-- <Label text="{i18n>UploadedDocuments}" />
+								<Button text="{i18n>Update}" press="onUpdate" /> -->
+								<Label />
+								<ScrollContainer
+									height="100px"
+									width="100%"
+									horizontal="false"
+									vertical="true"
+									focusable="true">
+									<List
+										id="documentList"
+										itemPress="onPressdocumentList"
+										mode="{viewModel>/sListMode}"
+										delete="onDeleteDocument" />
+								</ScrollContainer>
+								<core:Title text="{i18n>Label.detail.general2}" />
+								<Label text="{i18n>Label.detail.target}" visible="{viewModel>/bVisibleTarget}" required="{viewModel>/bRequiredTarget}" />
+								<CheckBox
+									visible="{viewModel>/bVisibleTarget}"
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.target.ltt}"
+									selected="{
+										path: 'pmtool>IsTargetLtt',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<CheckBox
+									visible="{viewModel>/bVisibleTarget}"
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.target.quality}"
+									selected="{
+										path: 'pmtool>IsTargetQuality',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<CheckBox
+									visible="{viewModel>/bVisibleTarget}"
+									editable="{viewModel>/bEnabled}"
+									text="{i18n>Label.detail.target.productivity}"
+									selected="{
+										path: 'pmtool>IsTargetProduktivity',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<Label text="{i18n>Label.detail.demarcation}" visible="{viewModel>/bVisibleDemarcation}" required="{viewModel>/bRequiredDemarcation}" />
+								<TextArea
+									visible="{viewModel>/bVisibleDemarcation}"
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>Demarcation}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="11"
+									maxLength="1000"
+									width="100%" />
+								<Label text="{i18n>Label.detail.addrisk}" visible="{viewModel>/bVisibleRisk}" />
+								<TextArea
+									visible="{viewModel>/bVisibleRisk}"
+									id="riskInput"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<TextArea
+									visible="{viewModel>/bVisibleRisk}"
+									id="actionInput"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label text="" visible="{viewModel>/bVisibleRisk}" />
+								<Button
+									visible="{viewModel>/bVisibleRisk}"
+									enabled="{viewModel>/bEnabled}"
+									id="AddRisk"
+									icon="sap-icon://add"
+									press="onAddRisk" />
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									id="ModifyRisk"
+									visible="false"
+									icon="sap-icon://edit"
+									press="onModifyRisk" />
+								<Label text="{i18n>Label.detail.risks}" visible="{viewModel>/bVisibleRisk}" required="{viewModel>/bRequiredRisk}" />
+								<ScrollContainer
+									visible="{viewModel>/bVisibleRisk}"
+									height="100px"
+									width="100%"
+									horizontal="false"
+									vertical="true"
+									focusable="true">
+									<List
+										id="riskList"
+										mode="{viewModel>/sListMode}"
+										delete="onDeleteRisk"
+										itemPress="onPressRiskList" />
+								</ScrollContainer>
+							</form:content>
+							<form:layoutData>
+								<FlexItemData shrinkFactor="0" backgroundDesign="Solid" styleClass="sapContrastPlus"/>
+							</form:layoutData>
+						</form:SimpleForm>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator icon="sap-icon://open-command-field" />
+				<IconTabFilter
+					icon="sap-icon://gantt-bars"
+					iconColor="Critical"
+					text="{i18n>Label.detail.milestones}"
+					key="milestones">
+					<ScrollContainer
+						height="100%"
+						width="100%"
+						horizontal="false"
+						vertical="true">
+						<form:SimpleForm
+							minWidth="1024"
+							editable="true"
+							layout="ResponsiveGridLayout"
+							title=""
+							labelSpanXL="6"
+							labelSpanL="6"
+							labelSpanM="4"
+							labelSpanS="4"
+							emptySpanXL="0"
+							emptySpanL="0"
+							emptySpanM="0"
+							emptySpanS="0"
+							columnsXL="2"
+							columnsL="2"
+							columnsM="2">
+							<form:content>
+								<core:Title text="{i18n>Label.detail.milestones}" />
+								<Label text="{i18n>Label.detail.milestone.description}" />
+								<TextArea
+									id="milestoneDescriptionInput"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label text="{i18n>Label.detail.milestone.objective}" />
+								<TextArea
+									id="milestoneObjectiveInput"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label text="{i18n>Label.detail.milestone.start}" />
+								<DatePicker
+									id="milestoneStartDate"
+									enabled="{viewModel>/bEnabled}"
+									valueFormat="y. MMMM d."
+									displayFormat="y. MMMM d." />
+								<Label text="{i18n>Label.detail.milestone.stop}" />
+								<DatePicker
+									id="milestoneStopDate"
+									enabled="{viewModel>/bEnabled}"
+									valueFormat="y. MMMM d."
+									displayFormat="y. MMMM d." />
+								<Label text="" />
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									id="AddMilestone"
+									icon="sap-icon://add"
+									press="onAddMilestone" />
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									id="ModifyMilestone"
+									visible="false"
+									icon="sap-icon://edit"
+									press="onModifyMilestone" />
+								<Label text="{i18n>Label.detail.milestones}" required="true" />
+								<ScrollContainer
+									height="100%"
+									width="100%"
+									horizontal="false"
+									vertical="true"
+									focusable="true">
+									<List
+										id="milestoneList"
+										mode="{viewModel>/sListMode}"
+										delete="onDeleteMilestone"
+										itemPress="onPressMilestoneList" />
+								</ScrollContainer>
+							</form:content>
+							<form:layoutData>
+								<FlexItemData shrinkFactor="0" backgroundDesign="Solid" styleClass="sapContrastPlus"/>
+							</form:layoutData>
+						</form:SimpleForm>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator icon="sap-icon://open-command-field" />
+				<IconTabFilter
+					icon="sap-icon://synchronize"
+					iconColor="Negative"
+					text="{i18n>Label.detail.resources}"
+					key="resources">
+					<ScrollContainer
+						height="100%"
+						width="100%"
+						horizontal="false"
+						vertical="true">
+						<form:SimpleForm
+							minWidth="1024"
+							editable="true"
+							layout="ResponsiveGridLayout"
+							title=""
+							labelSpanXL="6"
+							labelSpanL="6"
+							labelSpanM="4"
+							labelSpanS="4"
+							emptySpanXL="0"
+							emptySpanL="0"
+							emptySpanM="0"
+							emptySpanS="0"
+							columnsXL="2"
+							columnsL="2"
+							columnsM="2">
+							<form:content>
+								<core:Title text="{i18n>Label.detail.resources}" />
+								<Label text="{i18n>Label.detail.setworkinghours}" />
+								<Input
+									id="resourceMemberInput"
+									editable="false"
+									type="Text" />
+								<Input
+									editable="{viewModel>/bEnabled}"
+									id="resourceHoursInput"
+									type="Text"
+									placeholder="{i18n>PlaceHolder.hours}" />
+								<Label text="" />
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									id="ModifyResource"
+									visible="false"
+									icon="sap-icon://edit"
+									press="onModifyResource" />
+								<Label text="{i18n>Label.detail.resources}" required="{viewModel>/bRequiredResource}" />
+								<ScrollContainer
+									height="100px"
+									width="100%"
+									horizontal="false"
+									vertical="true"
+									focusable="true">
+									<List
+										id="resourceList"
+										itemPress="onPressResourceList" />
+								</ScrollContainer>
+								<Label text="{i18n>Label.detail.sumofresources}" />
+								<Text id="sumofResources" />
+								<Label text="{i18n>Label.detail.addinvestment}" visible="{viewModel>/bVisibleInvestment}" />
+								<TextArea
+									visible="{viewModel>/bVisibleInvestment}"
+									id="investmentDescriptionInput"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Input
+									visible="{viewModel>/bVisibleInvestment}"
+									editable="{viewModel>/bEnabled}"
+									id="investmentCostInput"
+									type="Text"
+									placeholder="{i18n>PlaceHolder.money}" />
+								<Label text="" visible="{viewModel>/bVisibleInvestment}" />
+								<CheckBox
+									visible="{viewModel>/bVisibleInvestment}"
+									editable="{viewModel>/bEnabled}"
+									id="isActivationRequired"
+									text="{i18n>Label.detail.isactivationrequired}" />
+								<Label text="" visible="{viewModel>/bVisibleInvestment}" />
+								<Button
+									visible="{viewModel>/bVisibleInvestment}"
+									enabled="{viewModel>/bEnabled}"
+									id="AddInvestment"
+									icon="sap-icon://add"
+									press="onAddInvestment" />
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									id="ModifyInvestment"
+									visible="false"
+									icon="sap-icon://edit"
+									press="onModifyInvestment" />
+								<Label text="{i18n>Label.detail.investments}" visible="{viewModel>/bVisibleInvestment}" />
+								<ScrollContainer
+									visible="{viewModel>/bVisibleInvestment}"
+									height="100%"
+									width="100%"
+									horizontal="false"
+									vertical="true"
+									focusable="true">
+									<List
+										id="investmentList"
+										mode="{viewModel>/sListMode}"
+										delete="onDeleteInvestment"
+										itemPress="onPressInvestmentList" />
+								</ScrollContainer>
+								<Label text="{i18n>Label.detail.sumofinvestments}" visible="{viewModel>/bVisibleInvestment}" />
+								<Text id="sumofInvestments" visible="{viewModel>/bVisibleInvestment}" />
+								<core:Title text="{i18n>Label.detail.costs}" />
+								<Label text="{i18n>Label.detail.costs.orgit}" />
+								<TextArea
+									value="{pmtool>OrgitDescription}"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Input
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>OrgitCosts}"
+									placeholder="{i18n>PlaceHolder.money}" />
+								<Label text="{i18n>Label.detail.costs.travel}" />
+								<TextArea
+									value="{pmtool>TravelDescription}"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Input
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>TravelCosts}"
+									placeholder="{i18n>PlaceHolder.money}" />
+								<Label text="{i18n>Label.detail.costs.external}" />
+								<TextArea
+									value="{pmtool>ExternalDescription}"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Input
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>ExternalCosts}"
+									placeholder="{i18n>PlaceHolder.money}" />
+								<Label text="{i18n>Label.detail.costs.finish}" visible="{viewModel>/bVisibleFinish}" />
+								<TextArea
+									visible="{viewModel>/bVisibleFinish}"
+									value="{pmtool>FinishDescription}"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Input
+									visible="{viewModel>/bVisibleFinish}"
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>FinishCosts}"
+									placeholder="{i18n>PlaceHolder.money}" />
+								<Label text="{i18n>Label.detail.costs.other}" />
+								<TextArea
+									value="{pmtool>OtherDescription}"
+									editable="{viewModel>/bEnabled}"
+									placeholder="{i18n>PlaceHolder.value}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Input
+									editable="{viewModel>/bEnabled}"
+									value="{pmtool>OtherCosts}"
+									placeholder="{i18n>PlaceHolder.money}" />
+								<Label text="{i18n>Label.detail.sumofcosts}" />
+								<Input
+									id="sumofCosts"
+									editable="false"
+									value="{
+										parts:[
+											{path: 'pmtool>OrgitCosts'},
+											{path: 'pmtool>TravelCosts'},
+											{path: 'pmtool>ExternalCosts'},
+											{path: 'pmtool>FinishCosts'},
+											{path: 'pmtool>OtherCosts'}
+										],
+										formatter: '.formatter.getSumOfCosts'
+									}" />
+								<Label text="{i18n>Label.detail.isbudgetplanned}" />
+								<CheckBox
+									editable="{viewModel>/bEnabled}"
+									text=""
+									selected="{
+										path: 'pmtool>IsBudgetPlanned',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+							</form:content>
+							<form:layoutData>
+								<FlexItemData shrinkFactor="0" backgroundDesign="Solid" styleClass="sapContrastPlus"/>
+							</form:layoutData>
+						</form:SimpleForm>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator id="commitSeparator" icon="sap-icon://vertical-grip" />
+				<IconTabFilter
+					id="commitData"
+					icon="sap-icon://save"
+					iconColor="Neutral"
+					text="{i18n>Label.detail.commit}"
+					key="resources">
+					<ScrollContainer
+						height="100%"
+						width="100%"
+						horizontal="false"
+						vertical="true">
+						<form:SimpleForm id="commitForm"
+							editable="true"
+							title=""
+							layout="ResponsiveGridLayout"
+							labelSpanXL="4"
+							labelSpanL="3"
+							labelSpanM="4"
+							labelSpanS="12"
+							adjustLabelSpan="false"
+							emptySpanXL="0"
+							emptySpanL="4"
+							emptySpanM="0"
+							emptySpanS="0"
+							columnsXL="2"
+							columnsL="1"
+							columnsM="1"
+							singleContainerFullSize="false"
+							ariaLabelledBy="Title1">
+							<form:content>
+								<core:Title text="{i18n>Label.detail.commit}" />
+								<Label text="{i18n>Label.detail.commitwork}" />
+								<Button
+									enabled="{viewModel>/bEnabled}"
+									id="commit"
+									text="{i18n>Button.detail.commit.save}"
+									press="onCommit" />
+							</form:content>
+						</form:SimpleForm>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator id="approvalSeparator" icon="sap-icon://vertical-grip" />
+				<IconTabFilter
+					id="approvalData"
+					icon="sap-icon://approvals"
+					iconColor="Neutral"
+					text="{i18n>Label.detail.approval}"
+					key="resources">
+					<ScrollContainer
+						height="100%"
+						width="100%"
+						horizontal="false"
+						vertical="true">
+						<form:SimpleForm id="approvalForm"
+							editable="true"
+							title=""
+							layout="ResponsiveGridLayout"
+							labelSpanXL="4"
+							labelSpanL="3"
+							labelSpanM="4"
+							labelSpanS="12"
+							adjustLabelSpan="false"
+							emptySpanXL="0"
+							emptySpanL="4"
+							emptySpanM="0"
+							emptySpanS="0"
+							columnsXL="2"
+							columnsL="1"
+							columnsM="1"
+							singleContainerFullSize="false"
+							ariaLabelledBy="Title1">
+							<form:content>
+								<core:Title text="{i18n>Label.detail.approval}" />
+								<Label text="{i18n>Label.detail.approval.isaccepted}" />
+								<CheckBox
+									id="isaccepted" />
+								<Label text="{i18n>Label.detail.approval.isacceptedwithconditions}" />
+								<CheckBox
+									id="isacceptedwithconditions" />
+								<Label text="{i18n>Label.detail.approval.isprojectbonusaccepted}" />
+								<CheckBox
+									id="isprojectbonusaccepted" />
+								<Label text="{i18n>Label.detail.approval.isdeclined}" />
+								<CheckBox
+									id="isdeclined" />
+								<Label text="{i18n>Label.detail.approval.comments}" />
+								<TextArea
+									id="comments"
+									placeholder="{i18n>PlaceHolder.max1000chars}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label />
+								<Button
+									id="approval"
+									text="{i18n>Button.detail.approval.save}"
+									press="onApproval" />
+								<List id="approvalList" />
+							</form:content>
+						</form:SimpleForm>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabSeparator id="factSeparator" icon="sap-icon://vertical-grip" />
+				<IconTabFilter
+					id="factData"
+					icon="sap-icon://approvals"
+					iconColor="Neutral"
+					text="{i18n>Label.detail.facts}"
+					key="resources">
+					<ScrollContainer
+						height="100%"
+						width="100%"
+						horizontal="false"
+						vertical="true">
+						<form:SimpleForm id="factsForm"
+							editable="true"
+							title=""
+							layout="ResponsiveGridLayout"
+							labelSpanXL="4"
+							labelSpanL="3"
+							labelSpanM="4"
+							labelSpanS="12"
+							adjustLabelSpan="false"
+							emptySpanXL="0"
+							emptySpanL="4"
+							emptySpanM="0"
+							emptySpanS="0"
+							columnsXL="2"
+							columnsL="1"
+							columnsM="1"
+							singleContainerFullSize="false"
+							ariaLabelledBy="Title1">
+							<form:content>
+								<core:Title text="{i18n>Label.detail.facts.title}" />
+								<Label text="{i18n>Label.detail.facts.costs}" />
+								<TextArea
+									value="{pmtool>FactCosts}"
+									placeholder="{i18n>PlaceHolder.max1000chars}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label text="{i18n>Label.detail.facts.hours}" />
+								<TextArea
+									value="{pmtool>FactHours}"
+									placeholder="{i18n>PlaceHolder.max1000chars}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+								<Label text="{i18n>Label.detail.facts.ontime}" />
+								<CheckBox
+									selected="{
+										path: 'pmtool>FactOnTime',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<Label text="{i18n>Label.detail.facts.onbudget}" />
+								<CheckBox
+									selected="{
+										path: 'pmtool>FactOnBudget',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<Label text="{i18n>Label.detail.facts.onkpi}" />
+								<CheckBox
+									selected="{
+										path: 'pmtool>FactOnKpi',
+										type: 'sap.ui.model.type.Boolean'
+									}" />
+								<Label text="{i18n>Label.detail.facts.comments}" />
+								<TextArea
+									value="{pmtool>FactComment}"
+									placeholder="{i18n>PlaceHolder.max1000chars}"
+									rows="5"
+									maxLength="1000"
+									width="100%" />
+							</form:content>
+						</form:SimpleForm>
+					</ScrollContainer>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+    </Page>
+</mvc:View>

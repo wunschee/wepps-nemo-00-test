@@ -1,0 +1,28 @@
+<mvc:View
+    controllerName="hahu.pmtool.controller.Master"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="page1">
+        <subHeader>
+            <Bar>
+                <contentLeft>
+                    <SearchField search="handleSearch"/>
+                </contentLeft>
+            </Bar>
+        </subHeader>
+        <List id="project-list" mode="SingleSelectMaster" selectionChange="handleSelectItem" />
+        <footer>
+            <Bar>
+            	<contentLeft>
+                    <Button id="btnHelp" press="openHelp" tooltip="{i18n>Button.help.title}" icon="sap-icon://sys-help" />
+                    <Button id="btnReport" press="openReport" tooltip="{i18n>Label.report.title}" icon="sap-icon://manager-insight" />
+                </contentLeft>
+                <contentRight>
+                    <Button id="btnDialog" press="onOpenNewIdeaDialog" tooltip="{i18n>Label.dialog.form.title}" icon="sap-icon://add" />
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>

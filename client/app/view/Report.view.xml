@@ -1,0 +1,157 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="hahu.pmtool.controller.Report"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:form="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="{i18n>Label.report.title}" showNavButton="true" navButtonPress="onNavBack">
+				<content>
+					<Table id="idProductsTable"
+						inset="false"
+						items="{
+							path: 'pmtool>/Projects',
+							sorter: {
+								path: 'Title'
+							},
+							filters : [
+								{ path : 'StatusId', operator : 'EQ', value1 : 3},
+								{ path : 'IsAccepted', operator : 'EQ', value1 : true},
+								{ path : 'IsTypeConfidental', operator : 'NE', value1 : true}
+							]
+						}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="Projects" level="H2"/>
+									<ToolbarSpacer />
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="12em">
+								<Text text="Title/Category" />
+							</Column>
+							<Column
+								minScreenWidth="Desktop"
+								demandPopin="true">
+								<Text text="Motivation" />
+							</Column>
+							<Column
+								minScreenWidth="Desktop"
+								demandPopin="true">
+								<Text text="Objective" />
+							</Column>
+							<Column
+								width="6em"
+								minScreenWidth="Tablet"
+								demandPopin="true"
+								hAlign="Center">
+								<Text text="On Time" />
+							</Column>
+							<Column
+								width="6em"
+								minScreenWidth="Tablet"
+								demandPopin="true"
+								hAlign="Center">
+								<Text text="On Budget" />
+							</Column>
+							<Column
+								width="6em"
+								minScreenWidth="Tablet"
+								demandPopin="true"
+								hAlign="Center">
+								<Text text="On KPI" />
+							</Column>
+							<Column
+								minScreenWidth="Desktop"
+								demandPopin="true"
+								hAlign="Center">
+								<Text text="Planned Budget" />
+							</Column>
+							<Column
+								minScreenWidth="Desktop"
+								demandPopin="true"
+								hAlign="Center">
+								<Text text="Fact Budget" />
+							</Column>
+							<Column
+								minScreenWidth="Desktop"
+								demandPopin="true"
+								hAlign="Center">
+								<Text text="Planned Hours" />
+							</Column>
+							<Column
+								minScreenWidth="Desktop"
+								demandPopin="true"
+								hAlign="Center">
+								<Text text="Fact Hours" />
+							</Column>
+							<Column hAlign="End">
+								<Text text="Comments" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier
+										title="{pmtool>Title}"
+										text="{
+											path: 'pmtool>CalculationId',
+											formatter: '.formatter.getProjectComplexity',
+											type: 'sap.ui.model.type.Integer'
+										}"/>
+									<Text text="{pmtool>Motivation}" />
+									<Text text="{pmtool>Objective}" />
+									<core:Icon
+										src="sap-icon://color-fill"
+										color="{
+											path: 'pmtool>FactOnTime',
+											formatter: '.formatter.getStatusColor'
+										}" >
+									</core:Icon>
+									<core:Icon
+										src="sap-icon://color-fill"
+										color="{
+											path: 'pmtool>FactOnBudget',
+											formatter: '.formatter.getStatusColor'
+										}" >
+									</core:Icon>
+									<core:Icon
+										src="sap-icon://color-fill"
+										color="{
+											path: 'pmtool>FactOnKpi',
+											formatter: '.formatter.getStatusColor'
+										}" >
+									</core:Icon>
+									<VBox>
+										<Text text="CAPEX: {
+											path: 'pmtool>Id',
+											formatter: '.formatter.getSumOfInvestments',
+											type: 'sap.ui.model.type.Integer'
+										}"/>
+										<Text text="OPEX: {
+											parts:[
+												{path: 'pmtool>OrgitCosts'},
+												{path: 'pmtool>TravelCosts'},
+												{path: 'pmtool>ExternalCosts'},
+												{path: 'pmtool>FinishCosts'},
+												{path: 'pmtool>OtherCosts'}
+											],
+											formatter: '.formatter.getSumOfCosts'
+										}"/>
+									</VBox>
+									<Text text="{pmtool>FactCosts}" />
+									<Text text="{
+											path: 'pmtool>Id',
+											formatter: '.formatter.getSumOfResources',
+											type: 'sap.ui.model.type.Integer'
+										}"/>
+									<Text text="{pmtool>FactHours}" />
+									<Text text="{pmtool>FactComment}" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
