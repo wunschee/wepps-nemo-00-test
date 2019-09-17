@@ -11,62 +11,62 @@ module.exports = function (app) {
 
             res.json(users.map(function (user) {
                 return {
-                    id: user.id,
-                    user_name: user.user_name
+                    Id: user.Id,
+                    UserName: user.UserName,
+                    DateOfEntry: user.DateOfEntry
                 };
             }));
         });
     });
 
     app.get('/api/user/:id', function (req, res) {
-        User.findOne({id: req.params.id}, function (err, user) {
+        User.findOne({Id: req.params.id}, function (err, user) {
             if (err || user === null){
                 return res.status(500).send('Error occured: database error');
             }
 
             res.json({
-                id: user.id,
-                user_name: user.user_name
+                Id: user.Id,
+                UserName: user.UserName,
+                DateOfEntry: user.DateOfEntry
             });
         });
     });
 
     app.post('/api/user', function (req, res) {
         new User({
-            id: req.body.id,
-            user_name: req.body.user_name
+            Id: req.body.Id,
+            UserName: req.body.UserName
         }).save(function (err, user) {
             if (err) {
                 return res.status(500).send('Error occurred: database error');
             }
 
             res.json({
-                id: user.id
+                Id: user.Id,
+                UserName: user.UserName,
+                DateOfEntry: user.DateOfEntry
             });
         });
     });
 
-    app.delete('/api/user/:id', function (req, res) {
-        User.remove({ id: req.params.id }, function (err) {
-            if (err) {
-                return res.status(500).send('Error occurred: database error');
-            }
-
-            return res.send();
-        });
-    });
-
     app.put('/api/user/:id', function (req, res) {
-        User.update({ 
-            id: req.params.id
-        }, {
-            user_name: req.body.user_name  
-        }, function (err) {
+        User.update({ Id: req.params.id }, { UserName: req.body.UserName }, function (err) {
             if (err){
                 return res.status(500).send('Error occurred: database error');
             }
 
             res.send();
         }); 
+    });
+
+    app.delete('/api/user/:id', function (req, res) {
+        User.remove({ Id: req.params.id }, function (err) {
+            if (err) {
+                return res.status(500).send('Error occurred: database error');
+            }
+
+            return res.send();
+        });
     });
 }

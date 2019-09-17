@@ -6,7 +6,7 @@
   "description": "wepps-nemo-00-test",
   "repository": {
     "type": "git",
-    "url": "http://pls037/IT/Central/hahu-site-pmtool.git"
+    "url": "https://github.com/wunschee/wepps-nemo-00-test.git"
   },
   "scripts": {
     "start": "node app.js",

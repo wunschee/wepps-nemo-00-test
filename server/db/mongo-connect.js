@@ -9,6 +9,6 @@ mongoose.Promise = global.Promise;
 module.exports = function () {
     mongoose
         .connect(db, { dbName: 'test', useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true })
-        .then(() => console.log('MongoDB (Atlas) connected at ' + db))
+        .then(() => console.log('Atlas MongoDB cloud service connected at ' + db))
         .catch(err => console.log(err));
 }

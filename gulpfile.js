@@ -7,32 +7,20 @@ var ui5preload = require('gulp-ui5-preload');
 
 gulp.task('clean', function(){
     return gulp.src([
-        'dist',
-        './Component-preload.js'
+        './client/app/Component-preload.js'
     ], { read: false, allowEmpty: true })
     .pipe(clean());
 });
 
 gulp.task('preload', function() {
     return gulp.src([
-        './**/**.+(js|xml)',
-        '!./node_modules/**'
+        './client/app/**/**.+(js|xml)',
+        '!./client/app/resources/**'
     ])
     .pipe(gulpif('**/*.js', uglify()))    //only pass .js files to uglify
     .pipe(gulpif('**/*.xml', prettydata({ type: 'minify' }))) // only pass .xml to prettydata
-    .pipe(ui5preload({ base: './', namespace: 'hahu.pmtool' }))
-    .pipe(gulp.dest('./'));
+    .pipe(ui5preload({ base: './client/app/', namespace: 'hahu.pmtool' }))
+    .pipe(gulp.dest('./client/app/'));
 });
 
-gulp.task('distribute', function() {
-    return gulp.src([
-        './**/**.+(js|xml|css|properties|png|pdf)',
-        '!./node_modules/**',
-        './**.+(js|json|html)',
-        '!./gulpfile.js',
-        '!./package.json'
-    ], { base: './' })
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('default', gulp.series('clean', 'preload', 'distribute'));
+gulp.task('default', gulp.series('clean', 'preload'));

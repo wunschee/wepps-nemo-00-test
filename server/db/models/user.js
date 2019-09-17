@@ -3,8 +3,18 @@
 let mongoose = require('mongoose');
 
 let userSchema = mongoose.Schema({
-    id: Number,
-    user_name: String
+    Id: {
+        type: Number,
+        required: true
+    },
+    UserName: {
+        type: String,
+        required: true
+    },
+    DateOfEntry: {
+        type: Date,
+        default: Date.now()
+    }
 });
 
 let User = mongoose.model('User', userSchema);

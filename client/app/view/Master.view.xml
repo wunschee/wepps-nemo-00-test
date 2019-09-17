@@ -2,6 +2,7 @@
     controllerName="hahu.pmtool.controller.Master"
     xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
     xmlns="sap.m"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page id="page1">
@@ -12,7 +13,22 @@
                 </contentLeft>
             </Bar>
         </subHeader>
-        <List id="project-list" mode="SingleSelectMaster" selectionChange="handleSelectItem" />
+
+        <form:SimpleForm
+            editable="true"
+            layout="ResponsiveGridLayout">
+            <core:Title text="Add user to list"/>
+            <Label text="Id" required="true"/>
+            <Input id="addId"/>
+            <Label text="User name" required="true"/>
+            <Input id="addUserName"/>
+            <Button press="addUser" text="Add user" tooltip="{i18n>Button.help.title}" icon="sap-icon://sys-help" />
+        </form:SimpleForm>
+
+        <List id="user-list" items="{/}" mode="SingleSelectMaster" selectionChange="handleSelectItem">
+            <StandardListItem type="Navigation" title="{UserName}" icon="sap-icon://employee-pane" />
+        </List>
+
         <footer>
             <Bar>
             	<contentLeft>
