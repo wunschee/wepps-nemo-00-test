@@ -1,43 +1,21 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta charset="UTF-8">
-
-		<title>Project Management Organisation - PM Tool</title>
-
-		<script id="sap-ui-bootstrap"
-			src="./resources/1.70.0/resources/sap-ui-core.js"
-			data-sap-ui-async="true"
-			data-sap-ui-preload="true"
-			data-sap-ui-libs="sap.m,sap.ui.core,sap.ui.layout,sap.f"
-			data-sap-ui-theme="sap_belize"
-			data-sap-ui-compatVersion="edge"
-			data-sap-ui-bindingSyntax="complex"
-			data-sap-ui-resourceroots='{"hahu.pmtool": "./"}'>
-		</script>
-
-		<script type="text/javascript" src="session/sessionmanager.js"></script>
-		<script type="text/javascript" src="session/users.js"></script>
-		<script type="text/javascript" src="session/main.js"></script>
-
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-
-		<script>
-			sap.ui.getCore().attachInit(function() {
-				new sap.m.Shell({
-					app: new sap.ui.core.ComponentContainer({
-						height : "100%",
-						name : "hahu.pmtool"
-					}),
-                    appWidthLimited: false
-				}).placeAt("content");
-			});
-		</script>
-	</head>
-
-	<body class="sapUiBody" id="content">
-	</body>
-
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PTE - Grund</title>
+	<script id="sap-ui-bootstrap"
+		src="./resources/1.70.0/resources/sap-ui-core.js"
+		data-sap-ui-theme="sap_belize"
+		data-sap-ui-resourceroots='{
+			"pte.grund": "./"
+		}'
+		data-sap-ui-oninit="module:pte/grund/init"
+		data-sap-ui-compatVersion="edge"
+		data-sap-ui-async="true">
+	</script>
+</head>
+<body class="sapUiBody">
+	<div data-sap-ui-component data-name="pte.grund" data-id="container" data-settings='{"id" : "nav"}'></div>
+</body>
 </html>

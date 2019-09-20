@@ -1,0 +1,12 @@
+<mvc:View
+	controllerName="pte.grund.controller.Home"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page title="{i18n>homePageTitle}" class="sapUiResponsiveContentPadding">
+		<content>
+			<Button id="displayNotFoundBtn" text="{i18n>DisplayNotFound}" press=".onDisplayNotFound" class="sapUiTinyMarginEnd"/>
+			<Button id="studentListBtn" text="{i18n>ShowStudentList}" press=".onNavToStudents" class="sapUiTinyMarginEnd"/>
+			<Button id="studentOverviewBtn" text="{i18n>ShowStudentOverview}" press=".onNavToStudentOverview"/>
+		</content>
+	</Page>
+</mvc:View>

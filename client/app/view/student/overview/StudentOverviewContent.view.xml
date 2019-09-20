@@ -1,0 +1,41 @@
+<mvc:View
+	controllerName="pte.grund.controller.student.overview.StudentOverviewContent"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Table id="studentsTable"
+		items="{/}"
+		itemPress=".onItemPressed">
+		<headerToolbar>
+			<Toolbar>
+				<Title text="{i18n>Students}" level="H2"/>
+				<ToolbarSpacer />
+				<SearchField id="searchField" search=".onSearchStudentsTable" width="50%"/>
+				<Button icon="sap-icon://sort" press=".onSortButtonPressed"/>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column id="studentIDCol"><Text text="{i18n>StudentID}"/></Column>
+			<Column id="firstNameCol" demandPopin="true"><Text text="{i18n>formFirstName}"/></Column>
+			<Column id="lastNameCol" demandPopin="true"><Text text="{i18n>formLastName}"/></Column>
+			<Column id="addressCol" minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>formAddress}"/></Column>
+			<Column id="cityCol" minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>formCity}"/></Column>
+			<Column id="postalCodeCol" minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>formPostalCode}"/></Column>
+			<Column id="countryCol" minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>formCountry}"/></Column>
+			<Column id="homePhoneCol" minScreenWidth="Tablet" demandPopin="true" hAlign="Right"><Text text="{i18n>formPhoneHome}"/></Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Active">
+				<cells>
+					<Text text="{Id}"/>
+					<Text text="{UserName}"/>
+					<Text text="{DateOfEntry}"/>
+					<Text text="{Address}"/>
+					<Text text="{City}"/>
+					<Text text="{PostalCode}"/>
+					<Text text="{Country}"/>
+					<Text text="{HomePhone}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</mvc:View>

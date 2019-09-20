@@ -19,7 +19,7 @@ gulp.task('preload', function() {
     ])
     .pipe(gulpif('**/*.js', uglify()))    //only pass .js files to uglify
     .pipe(gulpif('**/*.xml', prettydata({ type: 'minify' }))) // only pass .xml to prettydata
-    .pipe(ui5preload({ base: './client/app/', namespace: 'hahu.pmtool' }))
+    .pipe(ui5preload({ base: './client/app/', namespace: 'pte.grund' }))
     .pipe(gulp.dest('./client/app/'));
 });
 

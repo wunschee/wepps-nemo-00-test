@@ -1,11 +1,11 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="hahu.pmtool.controller.NotFound"
-	xmlns:html="http://www.w3.org/1999/xhtml">
-	<App>
-		<pages>
-			<MessagePage
-	            title="{i18n>Message.notfound}"
-	            text="{i18n>Message.notfound.text}"
-	            description="{i18n>Message.notfound.description}" />
-		</pages>
-	</App>
+<mvc:View
+	controllerName="pte.grund.controller.NotFound"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<MessagePage
+		title="{i18n>NotFound}"
+		text="{i18n>NotFound.text}"
+		description="{i18n>NotFound.description}"
+		showNavButton="true"
+		navButtonPress=".onNavBack"/>
 </mvc:View>

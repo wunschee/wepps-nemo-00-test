@@ -1,0 +1,34 @@
+<mvc:View
+	controllerName="pte.grund.controller.student.Resume"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		title="{i18n>ResumeOf} {/UserName} {/DateOfEntry}"
+		id="studentResumePage"
+		showNavButton="true"
+		navButtonPress=".onNavBack">
+		<content>
+			<IconTabBar
+				id="iconTabBar"
+				headerBackgroundDesign="Transparent"
+				class="sapUiResponsiveContentPadding"
+				select=".onTabSelect"
+				selectedKey="{view>/selectedTabKey}">
+				<items>
+					<IconTabFilter id="infoTab" text="{i18n>tabInfo}" key="Info">
+						<Text text="{/Id}"/>
+					</IconTabFilter>
+					<IconTabFilter id="projectsTab" text="{i18n>tabProjects}" key="Projects">
+						<mvc:XMLView viewName="pte.grund.view.student.ResumeProjects"></mvc:XMLView>
+					</IconTabFilter>
+					<IconTabFilter id="hobbiesTab" text="{i18n>tabHobbies}" key="Hobbies">
+						<!-- place content via lazy loading -->
+					</IconTabFilter>
+					<IconTabFilter id="notesTab" text="{i18n>tabNotes}" key="Notes">
+						<!-- place content via lazy loading -->
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+	</Page>
+</mvc:View>

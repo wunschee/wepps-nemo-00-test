@@ -1,32 +1,19 @@
 sap.ui.define([
-	"sap/ui/core/UIComponent",
-	"sap/ui/Device",
-	"hahu/pmtool/model/models",
-	"hahu/pmtool/controller/NewProjectDialog"
-], function (UIComponent, Device, models, NewProjectDialog) {
+	"sap/ui/core/UIComponent"
+], function (UIComponent) {
 	"use strict";
 
-	return UIComponent.extend("hahu.pmtool.Component", {
-
+	return UIComponent.extend("pte.grund.Component", {
 		metadata: {
 			manifest: "json"
 		},
 
 		init: function () {
-			// call the base component's init function
+			// call the init function of the parent
 			UIComponent.prototype.init.apply(this, arguments);
 
-			// enable routing
+			// create the views based on the url/hash
 			this.getRouter().initialize();
-
-			// set the device model
-			this.setModel(models.createDeviceModel(), "device");
-
-			// set the view model
-			this.setModel(models.createViewModel(), "viewModel");
-
-			// set dialog's
-            this._newprojectDialog = new NewProjectDialog(this.getRootControl());
 		},
 
         getContentDensityClass : function () {
@@ -38,15 +25,6 @@ sap.ui.define([
 				}
 			}
 			return this._sContentDensityClass;
-		},
-
-		exit : function () {
-            this._newprojectDialog.destroy();
-            delete this._newprojectDialog;
-		},
-		
-        openNewProjectDialog : function (detailId) {
-			this._newprojectDialog.open(detailId);
 		}
 	});
 });

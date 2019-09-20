@@ -1,12 +1,12 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"pte/grund/controller/BaseController"
+], function (BaseController) {
 	"use strict";
 
-	return Controller.extend("hahu.pmtool.controller.Main", {
+	return BaseController.extend("pte.grund.controller.student.overview.StudentOverview", {
+
 		onInit: function () {
 			// Content Density
-			// debugger;
 			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 		}
 	});

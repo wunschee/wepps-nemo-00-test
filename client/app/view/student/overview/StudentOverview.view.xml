@@ -1,0 +1,13 @@
+<mvc:View
+	controllerName="pte.grund.controller.student.overview.StudentOverview"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page id="StudentOverviewParent" title="{i18n>StudentOverview}"
+		showNavButton="true"
+		navButtonPress=".onNavBack"
+		class="sapUiResponsiveContentPadding">
+		<content>
+			<!-- inserted by routing -->
+		</content>
+	</Page>
+</mvc:View>

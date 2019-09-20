@@ -1,0 +1,38 @@
+<mvc:View
+	controllerName="pte.grund.controller.student.StudentList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Page
+		id="studentListPage"
+		title="{i18n>StudentList}"
+		showNavButton="true"
+		navButtonPress=".onNavBack"
+		class="sapUiResponsiveContentPadding">
+		<content>
+			<f:SimpleForm
+				editable="true"
+				layout="ResponsiveGridLayout">
+				<core:Title text="Add student to list"/>
+				<Label text="Id" required="true"/>
+				<Input id="addId"/>
+				<Label text="User name" required="true"/>
+				<Input id="addUserName"/>
+				<Label />
+				<Button press=".addUser" text="Add student" tooltip="Add student to list" icon="sap-icon://sys-help" />
+			</f:SimpleForm>
+
+			<List id="studentList" headerText="{i18n>ListOfAllStudents}" items="{/}">
+				<items>
+					<StandardListItem
+						title="{UserName} {DateOfEntry}"
+						iconDensityAware="false"
+						iconInset="false"
+						type="Navigation"
+						press=".onListItemPressed"/>
+				</items>
+			</List>
+		</content>
+	</Page>
+</mvc:View>
