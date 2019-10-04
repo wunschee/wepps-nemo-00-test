@@ -15,8 +15,6 @@
 				editable="true"
 				layout="ResponsiveGridLayout">
 				<core:Title text="Add student to list"/>
-				<Label text="Id" required="true"/>
-				<Input id="addId"/>
 				<Label text="User name" required="true"/>
 				<Input id="addUserName"/>
 				<Label />

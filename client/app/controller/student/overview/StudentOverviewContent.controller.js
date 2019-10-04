@@ -32,7 +32,7 @@ sap.ui.define([
 			this._oVSD = null;
 			this._sSortField = null;
 			this._bSortDescending = false;
-			this._aValidSortFields = ["Id", "UserName", "DateOfEntry"];
+			this._aValidSortFields = ["UserName", "DateOfEntry"];
 			this._sSearchQuery = null;
 			this._oRouterArgs = null;
 
@@ -101,15 +101,9 @@ sap.ui.define([
 
 			// init sorting (with simple sorters as custom data for all fields)
 			this._oVSD.addSortItem(new ViewSettingsItem({
-				key: "Id",
-				text: "Student ID",
-				selected: true			// by default the MockData is sorted by StudentID
-			}));
-
-			this._oVSD.addSortItem(new ViewSettingsItem({
 				key: "UserName",
 				text: "User Name",
-				selected: false
+				selected: true // by default the MockData is sorted by UserName
 			}));
 
 			this._oVSD.addSortItem(new ViewSettingsItem({

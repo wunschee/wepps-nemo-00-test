@@ -30,7 +30,7 @@
 						columnsL="1" columnsM="1">
 						<f:content>
 							<Label text="{i18n>formFirstName}"/>
-							<Text text="{/Id}"/>
+							<Text text="{/UserName}"/>
 							<Label text="{i18n>formLastName}"/>
 							<Text text="{/UserName}"/>
 							<Label text="{i18n>formAddress}"/>

@@ -16,7 +16,7 @@
 				selectedKey="{view>/selectedTabKey}">
 				<items>
 					<IconTabFilter id="infoTab" text="{i18n>tabInfo}" key="Info">
-						<Text text="{/Id}"/>
+						<Text text="{/UserName}"/>
 					</IconTabFilter>
 					<IconTabFilter id="projectsTab" text="{i18n>tabProjects}" key="Projects">
 						<mvc:XMLView viewName="pte.grund.view.student.ResumeProjects"></mvc:XMLView>

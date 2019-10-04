@@ -11,7 +11,7 @@ module.exports = function (app) {
 
             res.json(users.map(function (user) {
                 return {
-                    Id: user.Id,
+                    Id: user._id,
                     UserName: user.UserName,
                     DateOfEntry: user.DateOfEntry
                 };
@@ -20,13 +20,13 @@ module.exports = function (app) {
     });
 
     app.get('/api/user/:id', function (req, res) {
-        User.findOne({Id: req.params.id}, function (err, user) {
+        User.findOne({_id: req.params.id}, function (err, user) {
             if (err || user === null){
                 return res.status(500).send('Error occured: database error');
             }
 
             res.json({
-                Id: user.Id,
+                Id: user._id,
                 UserName: user.UserName,
                 DateOfEntry: user.DateOfEntry
             });
@@ -35,7 +35,6 @@ module.exports = function (app) {
 
     app.post('/api/user', function (req, res) {
         new User({
-            Id: req.body.Id,
             UserName: req.body.UserName
         }).save(function (err, user) {
             if (err) {
@@ -43,7 +42,7 @@ module.exports = function (app) {
             }
 
             res.json({
-                Id: user.Id,
+                Id: user._id,
                 UserName: user.UserName,
                 DateOfEntry: user.DateOfEntry
             });
@@ -51,7 +50,7 @@ module.exports = function (app) {
     });
 
     app.put('/api/user/:id', function (req, res) {
-        User.update({ Id: req.params.id }, { UserName: req.body.UserName }, function (err) {
+        User.update({ _id: req.params.id }, { UserName: req.body.UserName }, function (err) {
             if (err){
                 return res.status(500).send('Error occurred: database error');
             }
@@ -61,7 +60,7 @@ module.exports = function (app) {
     });
 
     app.delete('/api/user/:id', function (req, res) {
-        User.remove({ Id: req.params.id }, function (err) {
+        User.remove({ _id: req.params.id }, function (err) {
             if (err) {
                 return res.status(500).send('Error occurred: database error');
             }

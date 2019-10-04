@@ -29,19 +29,16 @@ sap.ui.define([
 
 		addUser: function () {
 			debugger;
-			var oId = this.getView().byId('addId');
 			var oUserName = this.getView().byId('addUserName');
-			var iId = parseInt(oId.getValue());
 			var sUserName = oUserName.getValue();
-			if (!isNaN(iId) && sUserName != '') {
-				var oData = {Id: iId, UserName: sUserName};
+			if (sUserName != '') {
+				var oData = {UserName: sUserName};
 				jQuery.ajax({
 					url: 'http://localhost:4000/api/user',
 					dataType: 'json',
 					data: oData,
 					type: 'post',
 					success: jQuery.proxy(function (oData) {
-						oId.setValue();
 						oUserName.setValue();
 						this.refresh();
 					}, this)
